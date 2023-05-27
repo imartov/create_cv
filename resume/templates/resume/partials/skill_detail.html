@@ -1,0 +1,13 @@
+<div hx-target="this" class="container">
+    Skill: {{ skill.skill }}
+
+    <div>
+        <button hx-get="{% url 'resume:update-skill' skill.id %}" hx-swap="outerHTML">
+            Update
+        </button>
+
+        <button hx-post="{% url 'resume:delete-skill' skill.id %}" hx-swap="outerHTML swap:1s">
+            Delete
+        </button>
+    </div>
+</div>

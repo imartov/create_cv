@@ -1,0 +1,102 @@
+{% extends 'resume/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="md:flex md:items-center md:justify-between">
+        <div class="flex-1 min-w-0">
+            <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+                Add contacts for {{ position.position_name }}
+            </h2>
+        </div>
+        <div class="mt-4 flex md:mt-0 md:ml-4">
+            <button type="button" hx-get="{% url 'resume:create-contact-form' position.id %}" hx-target="#contactforms" hx-swap="beforeend"
+                class="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Add form
+            </button>
+        </div>
+    </div>
+
+
+    <div id="contactforms" class="py-5 mt-5"></div>
+
+    <div class="mt-5 py-5 border-t border-gray-100">
+        {% for contact in contacts %}
+
+        {% include "resume/partials/contact_detail.html" %}
+
+        {% endfor %}
+    </div>
+
+
+
+
+
+
+
+
+        <!-- {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button> -->
+        
+        <!-- {% for field in form %}
+            <div>
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+            {% if field.help_text %}
+                <p class="help">{{ field.help_text }}</p>
+            {% endif %}
+            </div>
+        {% endfor %}
+        {{ form.as_p }} -->
+
+
+
+        
+        <!-- {% if formset %}
+            <h3>Contacts</h3>
+            {{ formset.management_form }}
+            {% csrf_token %}
+
+            <div id="contact-form-list">
+                {% for form in formset %}
+                    {{ formset.management_form }}
+                    {{ form.errors }}
+                    {{ form.id }}
+                    <div class="contact-form">{{ field.label_tag }} {{ field }}</div>
+                {% endfor %}
+            </div>    
+
+            <div id="emty-form" class="">{{ formset.empty_form.as_p }}</div>
+            <button id="add-more" type="button">Add more</button>
+            <button id="save" type="submit" class="save btn btn-secondary">Save</button>
+        {% endif %}
+        
+    </form>    
+    </div>
+    <script>
+        
+        const addMoreBtn = document.getElementById("add-more")
+        const totalNewForms = document.getElementById('id_form-TOTAL_FORMS')
+
+        addMoreBtn.addEventListener('click', add_new_form)
+        function add_new_form(event) {
+            if (event) {
+                event.preventDefault()
+            }
+            const currentContactForms = document.getElementsByClassName('contact-form')
+            const currentFormCount = currentContactForms.length// + 1
+            console.log(currentContactForms.length)
+            const formCopyTarget = document.getElementById('contact-form-list')
+            const copyEmptyFormEl = document.getElementById("emty-form").cloneNode(true)
+            copyEmptyFormEl.setAttribute('class', 'contact-form')
+            copyEmptyFormEl.setAttribute('id', `form-${currentFormCount}`)
+            const regex = new RegExp('__prefix__', 'g')
+            copyEmptyFormEl.innerHTML = copyEmptyFormEl.innerHTML.replace(regex, currentFormCount)
+            totalNewForms.setAttribute('value', currentContactForms + 1)
+            formCopyTarget.append(copyEmptyFormEl)
+        } 
+
+    </script>-->
+
+{% endblock content %}

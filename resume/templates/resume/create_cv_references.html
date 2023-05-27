@@ -1,0 +1,22 @@
+{% extends 'resume/base.html' %}
+
+{% block content %}
+
+    <h2>Add references for {{ position.position_name }}</h2>
+    <hr>
+
+    <div class="container">
+        <button type="button" hx-get="{% url 'resume:create-reference-form' position.id %}" hx-target="#referenceform" hx-swap="beforeend">
+            Add reference
+        </button>
+    </div>
+
+    <div id="referenceform" class="container"></div>
+
+    <div class="container">
+        {% for reference in references %}
+            {% include 'resume/partials/reference_detail.html' %}
+        {% endfor %}
+    </div>
+
+{% endblock content %}

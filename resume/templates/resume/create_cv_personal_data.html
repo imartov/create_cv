@@ -1,0 +1,31 @@
+{% extends 'resume/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <div class="container">
+
+    <h1>Личные данные</h1>
+    <hr/>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ pers_form.as_p }}
+        <button type="submit" class="save btn btn-secondary">Save</button>
+          <button class="save btn btn-secondary">Save</button>
+    </form>
+    <p>{{ pos_id }}</p>
+
+   </div>
+
+</body>
+</html>
+
+{% endblock content %}

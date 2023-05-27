@@ -1,0 +1,23 @@
+<!-- {% load tailwind_filters %} -->
+
+<div class="container" style="margin-left: 20px;">
+    <div hx-target="this" hx-swap="outerHTML">
+        <form class="shadow p-3 mb-5 bg-body-tertiary rounded" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}   
+            {% if contact %}
+            <button type="submit" hx-post="{% url 'resume:update-skill' skill.id %}">
+                Submit
+            </button>
+            <button hx-get="{% url 'resume:detail-skill' skill.id %}" type="button">
+                Cancel
+            </button>
+            {% else %}
+            <!-- <button type="submit" hx-post="." -->
+                <button type="submit" hx-post="{% url 'resume:create_cv_skills' position.id %}">
+                Submit
+            </button>
+            {% endif %}
+        </form>
+    </div>
+</div>

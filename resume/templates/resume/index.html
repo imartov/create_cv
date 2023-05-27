@@ -1,0 +1,13 @@
+{% load static %}
+
+{% if personal_data %}
+    <ul>
+    {% for person in personal_data %}
+        <li><a href="{% url 'resume:get_person' person.id %}">{{ person.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No persons are available.</p>
+{% endif %}
+
+{{ count_skills }}

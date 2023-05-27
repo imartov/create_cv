@@ -1,0 +1,23 @@
+{% extends 'resume/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h2>Add skills for {{ position.position_name }}</h2>
+    <hr>
+
+    <div class="container">
+        <button type="button" hx-get="{% url 'resume:create-skill-form' position.id %}" hx-target="#skillform" hx-swap="beforeend">
+            Add skill
+        </button>
+    </div>
+
+    <div id="skillform" class="container"></div>
+
+    <div class="container">
+        {% for skill in skills %}
+            {% include 'resume/partials/skill_detail.html' %}
+        {% endfor %}
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'resume/base.html' %}
+
+{% block content %}
+
+    <h2>Add work experience for {{ position.position_name }}</h2>
+    <hr>
+
+    <div class="container">
+        <button type="button" hx-get="{% url 'resume:create-workexp-form' position.id %}" hx-target="#workexpform" hx-swap="beforeend">
+            Add work experience
+        </button>
+    </div>
+
+    <div id="workexpform" class="container"></div>
+
+    <div class="container">
+        {% for workexp in workexps %}
+            {% include 'resume/partials/workexp_detail.html' %}
+        {% endfor %}
+    </div>
+
+{% endblock content %}
