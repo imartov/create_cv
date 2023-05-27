@@ -19,4 +19,10 @@
         {% endfor %}
     </div>
 
+    <div>
+        <a href="{% url 'resume:create_cv_references' position.id %}">
+            <button>Next</button>
+        </a>
+    </div>
+
 {% endblock content %}

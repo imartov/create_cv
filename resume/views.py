@@ -45,7 +45,7 @@ def main_page(request):
 
 
 @login_required(login_url='/users/login/')
-def create_cv_position(request, username):
+def create_cv_position(request):
     ''' ренедрит форму для внесения позиции '''
 
     username = request.user.username
@@ -79,6 +79,7 @@ def create_cv_personal_data(request, username):
             pers_form = pers_form.save(commit=False)
             pers_form.pos = last_pos
             pers_form.save()
+            # TODO: удалить дубликаты
             return redirect('resume:create_cv_contacts', pk=last_pos.id)
 
     pers_form = resume.forms.CreateCVPersonalDataForm()
@@ -461,174 +462,3 @@ def delete_reference(request, pk):
             "POST",
         ]
     )
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # if request.method == 'POST':
-    #     form = resume.forms.CreateCVContactsFrorm(request.POST)
-    #     if form.is_valid():
-    #         form = form.save(commit=False)
-    #         form.pos = Position.objects.all().last()
-    #         form.save()
-    
-    # form = resume.forms.CreateCVContactsFrorm()
-    # context = {'form': form}
-    # return render(request, "resume/create_cv_contacts.html", context)
-    
-    # form = resume.forms.CreateCVContactsFrorm()
-
-    # ContactsFormset = modelformset_factory(
-    #     model=Contacts,
-    #     form=resume.forms.CreateCVContactsFrorm,
-    #     extra=0
-    # )
-
-    # if request.method == 'POST':
-    #     formset = ContactsFormset(request.POST or None) # queryset=Position.objects.all())
-    #     if formset.is_valid():
-    #         for instance in formset:
-    #             instance = instance.save(commit=False)
-    #             instance.pos = Position.objects.all().last()
-    #             instance.id = 3
-    #             instance.save()
-    #         return redirect('resume:create_cv_contacts')
-    #     else:
-    #         print(formset.errors)
-    # else:
-    #     formset = ContactsFormset()
-    
-    # context = {'formset': formset}
-    # return render(request, "resume/create_cv_contacts.html", context)
-
-
-
-    #     context = {
-    #         # 'form': form,
-    #         'formset': formset}
-    
-    # if request.method == 'POST':
-    #     print(request.POST)
-    # if all([form.is_valid(), formset.is_valid()]):
-    #     parent = form.save(commit=False)
-    #     parent.pos = last_pos
-    #     parent.save()
-    #     for form in formset:
-    #         child = form.save(commit=False)
-    #         child.pos = last_pos
-    #         child.save()
-
-    
-
-    # if request.method == 'POST':
-    #     contacts_form = resume.forms.CreateCVContactsFrorm(request.POST)
-    #     if contacts_form.is_valid():
-    #         contacts_form = contacts_form.save(commit=False)
-    #         contacts_form.pos = last_pos
-    #         contacts_form.save()
-    #         # return redirect('resume:create_cv_personal_data')
-
-    # contacts_form = resume.forms.CreateCVContactsFrorm()
-    
-
-    
-
-
-# class CreateCVPosition(CreateView):
-    
-#     model = Position
-#     form_class = resume.forms.CreateCVPositionForm
-#     template_name = 'resume/create_cv_position.html.html'
-#     # success_url = reverse_lazy('index')
-
-#     def get_form_kwargs(self):
-#         """ Passes the request object to the form class.
-#          This is necessary to only display members that belong to a given user"""
-
-#         kwargs = super(CreateCVPosition, self).get_form_kwargs()
-#         kwargs['request'] = self.request
-#         return kwargs
-
-
-# class CreateCV(generic.ListView):
-#     model = PersonalData.objects.all()
-#     template_name = 'resume/create_cv.html'
-#     context_object_name = 'personal_data'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-
-#     def get_queryset(self):
-#         return super().get_queryset().filter(user_id=self.request.user.id)
-
-
-# def index(request):
-#     personal_data = PersonalData.objects.all()
-#     context = {'personal_data': personal_data}
-#     return render(request, 'resume/index.html', context)
-
-
-class IndexView(generic.ListView):
-    queryset = PersonalData.objects.all()
-    template_name = 'resume/index.html'
-    context_object_name = 'personal_data'
-
-    # def get_queryset(self):
-    #     """Return the last five published questions."""
-    #     return Question.objects.order_by('-pub_date')[:5]
-
-
-# def get_person(request, person_id):
-#     personal_data = get_object_or_404(PersonalData, pk=person_id)
-#     work_experience = WorkExperience.objects.filter(person_id=person_id)
-#     contacts = Contacts.objects.filter(person_id=person_id)
-#     responsibilities = Responsibilities.objects.all()
-#     progress = Progress.objects.all()
-#     context = {
-#         'personal_data': personal_data,
-#         'work_experience': work_experience,
-#         'contacts': contacts,
-#         'responsibilities': responsibilities,
-#         'progress': progress
-#     }
-#     return render(request, 'resume/get_resume.html', context=context)
-
-
-# class GetResume(generic.DetailView):
-#     queryset = Position.objects.filter(pk=1)
-#     template_name = 'resume/get_resume.html'
-#     context_object_name = 'position'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['person'] = PersonalData.objects.get(pk=1)
-#         context['contacts'] = Contacts.objects.filter(person_id=1)
-#         context['skills'] = Skills.objects.filter(position_id=context['position'].pk)
-#         context['work_experience'] = WorkExperience.objects.filter(position_relative_id=context['position'].pk)
-
-#         context['responsibilities'] = []
-#         context['progress'] = []
-#         for item in context['work_experience']:
-#             context['responsibilities'] += Responsibilities.objects.filter(work_company_id=item.pk)
-#             context['progress'] += Progress.objects.filter(work_company_id=item.pk)
-
-#         context['references'] = References.objects.filter(position_id=context['position'].pk)
-#         return context
-
-
-# TODO: удалить базу и миграции, перевыполнить миграции
-# TODO: redirect after registration
-# TODO: связать user и Position c во Views
-# TODO: @loginrequired над всеми views
-# TODO: если не зарегистрирован, то создать аккаунт
-
-

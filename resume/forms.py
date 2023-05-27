@@ -6,14 +6,6 @@ import users
 from django.forms.models import inlineformset_factory
 
 
-class CreateCVPersonalDataForm(ModelForm):
-    ''' Создает форму для персональных данных '''
-    
-    class Meta:
-        model = resume.models.PersonalData
-        fields = ('name', 'photo', )
-
-
 class CreateCVPositionForm(ModelForm):
     ''' Создает форму для позиции '''
     
@@ -21,6 +13,14 @@ class CreateCVPositionForm(ModelForm):
         model = resume.models.Position
         fields = '__all__'
         exclude = ('created_by', )
+
+
+class CreateCVPersonalDataForm(ModelForm):
+    ''' Создает форму для персональных данных '''
+    
+    class Meta:
+        model = resume.models.PersonalData
+        fields = ('first_name', 'last_name')
 
 
 class CreateCVContactForm(forms.ModelForm):

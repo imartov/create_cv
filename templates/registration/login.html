@@ -43,6 +43,12 @@
 
     {# Assumes you setup the password_reset view in your URLconf #}
     <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
+    <p>Do you not have an account?</p>
+    <a href="{% url 'register' %}">
+      <button type="button" class="btn btn-outline-primary">Register</button>
+    </a>
+
   </div>
 
   </body>

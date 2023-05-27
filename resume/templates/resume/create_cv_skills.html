@@ -18,6 +18,13 @@
         {% for skill in skills %}
             {% include 'resume/partials/skill_detail.html' %}
         {% endfor %}
+
+        <div>
+            <a href="{% url 'resume:create_cv_workexp' position.id %}">
+                <button>Next</button>
+            </a>
+        </div>
     </div>
+
 
 {% endblock content %}

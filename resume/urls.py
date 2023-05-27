@@ -5,12 +5,8 @@ from . import views
 app_name = 'resume'
 urlpatterns = [
     path('', views.main_page, name='main_page'),
-    path('list/', views.IndexView.as_view(), name='index'),
-    # path('<int:pk>/', views.GetResume.as_view(), name='get_person'),
-    path('<str:username>/create-cv-position/', views.create_cv_position, name='create_cv_position'),
+    path('create-cv-position/', views.create_cv_position, name='create_cv_position'),
     path('<str:username>/create-cv-pers-data/', views.create_cv_personal_data, name='create_cv_personal_data'),
-    # path('create-cv-position/', views.CreateCVPosition.as_view(), name='create_cv_position'),
-    
 
     # paths for working with Contacts objects
     path('create-cv-contacts/<int:pk>', views.create_cv_contacts, name='create_cv_contacts'),

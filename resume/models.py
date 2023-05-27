@@ -18,8 +18,8 @@ class Position(models.Model):
 
 class PersonalData(models.Model):
     pos = models.ForeignKey('Position', blank=True, null=True, on_delete=models.CASCADE, verbose_name='Position')
-    name = models.CharField(max_length=50, blank=True, verbose_name='Name')
-    photo = models.ImageField(blank=True)
+    first_name = models.CharField(max_length=50, blank=True, verbose_name='First name')
+    last_name = models.CharField(max_length=50, blank=True, verbose_name='Last name')
 
     def __str__(self):
         return self.name
@@ -107,8 +107,3 @@ class References(models.Model):
     
     def get_absolute_url(self):
         return reverse("referenc", kwargs={"pk": self.pk})
-    
-
-# TODO: связанные формы с user по ссылке https://docs.djangoproject.com/en/4.2/topics/class-based-views/generic-editing/
-
-
