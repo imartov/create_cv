@@ -1,7 +1,9 @@
 *.log
 *.pot
 *.pyc
-__pycache__
+*.vscode
+*.vscode
+/__pycache__
 db.sqlite3
 media
 
