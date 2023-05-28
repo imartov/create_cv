@@ -1,0 +1,12 @@
+<div hx-target="this">
+    <p>{{ position.position_name }}</p>
+    <div class="mt-2">
+        <button hx-get="{% url 'resume:update_position' position.id %}" hx-swap="outerHTML">
+            Update
+        </button>
+        <!-- <button hx-post="{% url 'resume:delete-contact' contact.id %}" hx-swap="outerHTML swap:1s"
+            class="ml-2 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+            Delete
+        </button> -->
+    </div>
+</div>

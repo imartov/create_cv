@@ -7,6 +7,7 @@ from django.views import generic
 from .models import *
 
 from .forms import (
+    CreateCVPositionForm,
     CreateCVContactForm,
     CreateCVSkillForm,
     CreateCVPersonalDataForm,
@@ -58,12 +59,38 @@ def create_cv_position(request):
             position_form.save()
             return redirect('resume:create_cv_personal_data', username)
 
-    position_form = resume.forms.CreateCVPositionForm()
+    position_form = CreateCVPositionForm()
     context = {
         'position_form': position_form,
         'username': username}
 
     return render(request, "resume/create_cv_position.html", context)
+
+
+def update_position(request, pos_id):
+    position = get_object_or_404(Position, id=pos_id)
+    position_form = CreateCVPositionForm()
+
+    if request.method == 'POST':
+        if position_form.is_valid():
+            position_form.save()
+
+    context = {
+        'position': position,
+        'position_form': position_form
+    }
+
+    return render(request, 'resume/partials/position_form.html', context)
+
+
+def detail_position(request, pos_id):
+    position = get_object_or_404(Position, id=pos_id)
+
+    context = {
+        'position': position
+    }
+
+    return render(request, 'resume/partials/position_detail.html', context)
 
 
 @login_required(login_url='/users/login/')

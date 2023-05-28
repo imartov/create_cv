@@ -5,7 +5,13 @@ from . import views
 app_name = 'resume'
 urlpatterns = [
     path('', views.main_page, name='main_page'),
+
+    #paths for working with Position object
     path('create-cv-position/', views.create_cv_position, name='create_cv_position'),
+    path('htmx/contact/<int:pos_id>/update/', views.update_position, name='update_position'),
+    path('htmx/position/<int:pos_id>', views.detail_position, name='detail_position'),
+
+
     path('<str:username>/create-cv-pers-data/', views.create_cv_personal_data, name='create_cv_personal_data'),
 
     # paths for working with Contacts objects
