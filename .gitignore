@@ -4,9 +4,19 @@
 *.vscode
 *.vscode
 /vscode
+.vscode
 /__pycache__
 db.sqlite3
 media
+.pytest_cache
+/resume/migrations
+/resume/__pycache__
+/my_feedback/migrations
+/my_feedback/__pycache__
+/config/migrations
+/config/__pycache__
+/users/migrations
+/users/__pycache__
 
 # Backup files # 
 *.bak 
