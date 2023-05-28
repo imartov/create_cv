@@ -462,3 +462,39 @@ def delete_reference(request, pk):
             "POST",
         ]
     )
+
+
+
+def get_all_cv(request):
+    all_cv = Position.objects.filter(created_by_id=request.user.id)
+    context = {
+        'all_cv': all_cv
+    }
+
+    return render(request, 'resume/all_cv.html', context)
+
+
+def get_detail_cv(request, pos_id):
+    position = get_object_or_404(Position, pk=pos_id)
+    pers_datas = PersonalData.objects.filter(pos_id=pos_id)
+    contacts = Contacts.objects.filter(pos_id=pos_id)
+    skills = Skills.objects.filter(pos_id=pos_id)
+    work_exps = WorkExperience.objects.filter(pos_id=pos_id)
+    try:
+        summary = Summary.objects.get(pos_id=pos_id)
+    except Exception as ex:
+        summary = None
+    references = References.objects.filter(pos_id=pos_id)
+
+    context = {
+        'position': position,
+        'pers_data': pers_datas,
+        'contacts': contacts,
+        'skills': skills,
+        'work_exps': work_exps,
+        'summary': summary,
+        'references': references
+    }
+
+    return render(request, 'resume/detail_cv.html', context)
+    

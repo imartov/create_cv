@@ -35,4 +35,7 @@ urlpatterns = [
     path('htmx/reference/<int:pk>/update/', views.update_reference, name="update-reference"),
     path('htmx/reference/<int:pk>/delete/', views.delete_reference, name="delete-reference"),
     path('htmx/create-reference-form/<int:pk>/', views.create_reference_form, name='create-reference-form'),
+
+    path('my-all-cv', views.get_all_cv, name='get_all_cv'),
+    path('detail-cv/<int:pos_id>', views.get_detail_cv, name='get_detail_cv'),
 ]

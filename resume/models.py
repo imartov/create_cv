@@ -26,7 +26,7 @@ class PersonalData(models.Model):
     
     def get_absolute_url(self):
         return reverse("person", kwargs={"pk": self.pk})
-
+    
 
 class Contacts(models.Model):
     pos = models.ForeignKey('Position', blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Position')
@@ -35,14 +35,6 @@ class Contacts(models.Model):
 
     def __str__(self):
         return self.contact_label
-    
-
-class Summary(models.Model):
-    pos = models.ForeignKey('Position', blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Position')
-    summary = models.TextField(blank=True, null=True)
-    
-    def __str__(self):
-        return self.summary[:10]
 
 
 class Skills(models.Model):
@@ -75,26 +67,12 @@ class WorkExperience(models.Model):
         ordering = ["-date_of_employment"]
 
 
-# class Responsibilities(models.Model):
-#     work_company = models.ForeignKey('WorkExperience', blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Company')
-#     responsibility_name = models.CharField(max_length=255, verbose_name='Responsibilities', blank=True)
-
-#     def __str__(self):
-#         return self.responsibility_name
+class Summary(models.Model):
+    pos = models.ForeignKey('Position', blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Position')
+    summary = models.TextField(blank=True, null=True)
     
-#     def get_absolute_url(self):
-#         return reverse("resp", kwargs={"pk": self.pk})
-
-
-# class Progress(models.Model):
-#     work_company = models.ForeignKey('WorkExperience', blank=True, null=True, on_delete=models.SET_NULL, verbose_name='Company')
-#     progress_name = models.CharField(max_length=255, verbose_name='Progress', blank=True)
-
-#     def __str__(self):
-#         return self.progress_name
-    
-#     def get_absolute_url(self):
-#         return reverse("progres", kwargs={"pk": self.pk})
+    def __str__(self):
+        return self.summary[:10]
 
 
 class References(models.Model):

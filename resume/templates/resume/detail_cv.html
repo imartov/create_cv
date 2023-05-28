@@ -1,0 +1,125 @@
+{% extends 'resume/base.html' %}
+
+{% block content %}
+    <div>
+        <div>
+            <h1>CV for {{ position.position_name }}</h1>
+        </div>
+        <div>
+            <button>Update</button>
+        </div>
+    </div>
+
+    <div>
+        <div>
+            {{ position.position_name }}
+        </div>
+        <div>
+            <button>Update</button>
+        </div>
+    </div>
+
+    <div>
+        {% for pers_data in pers_datas %}
+            <div>
+                <div>
+                    <p>{{ pers_data.first_name }} {{ pers_data.last_name }}</p>
+                </div>
+                <div>
+                    <button>Update</button>
+                </div>
+            </div>
+        {% endfor %}    
+    </div>
+
+    <div>
+        {% for contact in contacts %}
+            <div>
+                <div>
+                    <p>{{ contact.contact_label }}: {{ contact.contact_value }}</p>
+                </div>
+                <div>
+                    <button>Update</button>
+                    <button>Delete</button>
+                </div>
+            </div>
+        {% endfor %}    
+    </div>
+
+    <div>
+        <div>
+            <h2>Skills</h2>
+        </div>
+
+        <div>
+            {% for skill in skills %}
+                <div>
+                    <ul>
+                        <li>{{ skill }}</li>
+                        <div>
+                            <button>Update</button>
+                            <button>Delete</button>
+                        </div>
+                    </ul>
+                </div>
+            {% endfor %}    
+        </div>
+    </div>
+
+    <div>
+        <h2>Work experience</h2>
+    </div>
+
+    <div>
+        {% for work_exp in work_exps %}
+            <div>
+                <div>
+                    <p>{{ work_exp.company }} | {{ work_exp.date_of_employment }}-{{ work_exp.date_of_dismissal }}</p>
+                </div>
+                <div>
+                    <p>
+                        <a href="{{ work_exp.link_company }}">work_exp.link_company</a>
+                    </p>
+                </div>
+                <div>
+                    <p>{{work_exp.position_work}}</p>
+                </div>
+                <div>
+                    <div>
+                        <p>Description</p>
+                    </div>
+                    <div>
+                        <p>{{ work_exp.description }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        
+        <div>
+            <div>
+                <h2>Summary</h2>
+            </div>
+            
+            <div>
+                <p>{{ summary.summary }}</p>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <h2>References</h2>
+            </div>
+
+            <div>
+                <ol>
+                    {% for reference in references %}
+                    <div>
+                        <li>{{ reference.ref_name }}: {{ reference.ref_link }}</li>                        
+                    </div>
+                    {% endfor %}
+                </ol> 
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,16 @@
+{% extends 'resume/base.html' %}
+
+{% block content %}
+
+    <div>
+        {% for cv in all_cv %}
+            <div>
+                <a href="{% url 'resume:get_detail_cv' cv.id %}">
+                    <p>{{ cv.position_name }}</p>
+                    <p>Created: {{ cv.date_create }}</p>
+                </a>
+            </div>
+        {% endfor %}    
+    </div>    
+
+{% endblock content %}
